@@ -70,7 +70,7 @@ graph LR
 
     def get_visual_findings(image_path):
         # Few-shot prompting recommended here using ODIR examples
-        prompt = "detect diabetic retinopathy signs and describe the optic disc"
+        prompt = "detect signs of diabetic retinopathy and glaucoma, and describe the optic disc and macula"
         
         output = pali_gemma.generate(
             inputs={

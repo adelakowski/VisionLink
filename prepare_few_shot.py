@@ -3,7 +3,7 @@ import os
 import json
 
 # Define paths
-base_path = r'd:\Users\axeld\MCIT\VisionLink'
+base_path = r'd:\Users\axeld\MCIT\VisionLink\VisionLink'
 csv_path = os.path.join(base_path, 'archive', 'full_df.csv')
 image_dir = os.path.join(base_path, 'archive', 'preprocessed_images')
 
