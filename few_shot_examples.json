@@ -1,0 +1,138 @@
+{
+    "N": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\0_right.jpg",
+            "label": "N",
+            "keywords": "normal fundus"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\1_right.jpg",
+            "label": "N",
+            "keywords": "normal fundus"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\8_right.jpg",
+            "label": "N",
+            "keywords": "normal fundus"
+        }
+    ],
+    "D": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\2_right.jpg",
+            "label": "D",
+            "keywords": "moderate non proliferative retinopathy"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\4_right.jpg",
+            "label": "D",
+            "keywords": "mild nonproliferative retinopathy"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\5_right.jpg",
+            "label": "D",
+            "keywords": "moderate non proliferative retinopathy"
+        }
+    ],
+    "G": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\167_right.jpg",
+            "label": "G",
+            "keywords": "glaucoma"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\583_right.jpg",
+            "label": "G",
+            "keywords": "glaucoma"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\746_right.jpg",
+            "label": "G",
+            "keywords": "suspected glaucoma\uff0csuspicious diabetic retinopathy"
+        }
+    ],
+    "C": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\24_right.jpg",
+            "label": "C",
+            "keywords": "cataract"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\112_right.jpg",
+            "label": "C",
+            "keywords": "cataract"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\188_right.jpg",
+            "label": "C",
+            "keywords": "cataract"
+        }
+    ],
+    "A": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\43_right.jpg",
+            "label": "A",
+            "keywords": "dry age-related macular degeneration\uff0cglaucoma"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\48_right.jpg",
+            "label": "A",
+            "keywords": "dry age-related macular degeneration"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\53_right.jpg",
+            "label": "A",
+            "keywords": "dry age-related macular degeneration"
+        }
+    ],
+    "H": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\23_right.jpg",
+            "label": "H",
+            "keywords": "hypertensive retinopathy"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\28_right.jpg",
+            "label": "H",
+            "keywords": "hypertensive retinopathy"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\32_right.jpg",
+            "label": "H",
+            "keywords": "hypertensive retinopathy"
+        }
+    ],
+    "M": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\13_right.jpg",
+            "label": "M",
+            "keywords": "pathological myopia"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\16_right.jpg",
+            "label": "M",
+            "keywords": "pathological myopia"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\18_right.jpg",
+            "label": "M",
+            "keywords": "pathological myopia"
+        }
+    ],
+    "O": [
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\9_right.jpg",
+            "label": "O",
+            "keywords": "vitreous degeneration"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\14_right.jpg",
+            "label": "O",
+            "keywords": "macular epiretinal membrane"
+        },
+        {
+            "image_path": "d:\\Users\\axeld\\MCIT\\VisionLink\\archive\\preprocessed_images\\15_right.jpg",
+            "label": "O",
+            "keywords": "myelinated nerve fibers"
+        }
+    ]
+}

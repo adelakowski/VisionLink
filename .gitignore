@@ -1,0 +1,12 @@
+# Dataset and Archive
+archive/
+*.zip
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment/Project
+.env
+.ipynb_checkpoints/

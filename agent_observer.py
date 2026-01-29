@@ -1,0 +1,67 @@
+import os
+import json
+import keras_nlp
+import keras
+
+# Configuration
+# Optimization: Float16 for "Rural/Low-resource" deployment
+try:
+    keras.config.set_floatx("float16")
+except Exception as e:
+    print(f"Warning: Could not set float16: {e}")
+
+class VisionAgent:
+    def __init__(self, model_id="pali_gemma_3b_mix_224"):
+        print(f"Loading Vision Model: {model_id}...")
+        # Load PaliGemma
+        self.model = keras_nlp.models.PaliGemmaCausalLM.from_preset(model_id)
+        print("Model loaded.")
+
+    def analyze_image(self, image_path, prompt="detect diabetic retinopathy signs and describe the optic disc"):
+        """
+        Analyzes the image and returns a text description of findings.
+        """
+        if not os.path.exists(image_path):
+            return f"Error: Image not found at {image_path}"
+
+        # Generate description
+        # Note: KerasNLP PaliGemma accepts image paths directly in the 'images' input for inference in some versions,
+        # but robust handling often requires pre-loading. Verify installed version behaviors.
+        # Assuming standard KerasNLP preset API.
+        
+        # Typically generate returns the string output found after the prompt.
+        output = self.model.generate(
+            inputs={
+                "images": [image_path], 
+                "prompts": [prompt]
+            }
+        )
+        
+        # Result might be a list or single string depending on batch size
+        result = output[0] if isinstance(output, list) else output
+        return result
+
+def load_few_shot_examples(json_path="few_shot_examples.json"):
+    if os.path.exists(json_path):
+        with open(json_path, 'r') as f:
+            return json.load(f)
+    return {}
+
+if __name__ == "__main__":
+    # Test stub
+    print("Initializing Agent A (Observer)...")
+    agent = VisionAgent()
+    
+    # Try to verify with a few-shot example if available
+    examples = load_few_shot_examples()
+    if 'D' in examples and examples['D']:
+        test_case = examples['D'][0]
+        test_img = test_case['image_path']
+        print(f"Testing with ODIR-5K image (Diabetic Retinopathy): {test_img}")
+        
+        description = agent.analyze_image(test_img)
+        print("\n--- Visual Findings ---")
+        print(description)
+        print("-----------------------")
+    else:
+        print("No few-shot examples found for testing. Please ensure Phase 1 is complete.")
