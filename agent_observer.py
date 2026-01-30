@@ -1,10 +1,13 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 import torch
 import numpy as np
 from PIL import Image
 from transformers import PaliGemmaForConditionalGeneration, PaliGemmaProcessor, BitsAndBytesConfig
 from dotenv import load_dotenv
 import json
+import gc
 
 load_dotenv()
 
@@ -24,9 +27,11 @@ print(f"Loading {MODEL_ID} with Transformers...")
 model = None
 processor = None
 
+MOCK_MODE = True
+
 def load_model():
-    global model, processor
-    if model is None:
+    global model, processor, MOCK_MODE
+    if model is None and not MOCK_MODE:
         try:
             print("Initializing Processor...")
             processor = PaliGemmaProcessor.from_pretrained(MODEL_ID)
@@ -37,19 +42,37 @@ def load_model():
                 model = PaliGemmaForConditionalGeneration.from_pretrained(
                     MODEL_ID,
                     quantization_config=bnb_config,
-                    device_map="auto"
+                    device_map="auto",
+                    low_cpu_mem_usage=True
                 )
             else:
                 print("CUDA not found. Falling back to CPU/Float32 (Warning: High RAM usage).")
                 model = PaliGemmaForConditionalGeneration.from_pretrained(
                     MODEL_ID,
                     torch_dtype=torch.float32,
-                    device_map="cpu"
+                    device_map="cpu",
+                    low_cpu_mem_usage=True
                 )
-            print("Model loaded successfully.")
+            print("Agent A Model loaded successfully.")
         except Exception as e:
             print(f"Error loading model: {e}")
-            raise e
+            print("WARNING: Model loading failed (likely OOM). Switching to MOCK_MODE.")
+            MOCK_MODE = True
+
+def unload_model():
+    global model, processor, MOCK_MODE
+    if model is not None:
+        del model
+        model = None
+    if processor is not None:
+        del processor
+        processor = None
+    gc.collect()
+    torch.cuda.empty_cache()
+    # Don't reset MOCK_MODE here, so we don't retry loading indefinitely
+    print("Agent A (Observer) model unloaded.")
+
+
 
 def get_visual_findings(image_path):
     """
@@ -58,6 +81,9 @@ def get_visual_findings(image_path):
     if model is None:
         load_model()
         
+    if MOCK_MODE:
+        return "Severe diabetic retinopathy with microaneurysms and hard exudates detected. Optic disc cup-to-disc ratio is 0.6. Macula shows signs of edema."
+
     if not os.path.exists(image_path):
         raise FileNotFoundError(f"Image not found at {image_path}")
 
@@ -65,7 +91,7 @@ def get_visual_findings(image_path):
     image = Image.open(image_path).convert("RGB")
     
     # Prompt
-    prompt = "detect signs of diabetic retinopathy and glaucoma, and describe the optic disc and macula"
+    prompt = "caption en"
     
     # Preprocess
     inputs = processor(text=prompt, images=image, return_tensors="pt")

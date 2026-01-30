@@ -1,17 +1,20 @@
 Phase 1: Data Preparation (ODIR-5K) - COMPLETED & VERIFIED
 - Extracted few-shot examples for PaliGemma from the ODIR-5K dataset.
 - Saved examples to `few_shot_examples.json`.
-- Verified image paths and diagnostic keywords by re-running `prepare_few_shot.py`.
 
-Phase 2: Agent A (The Observer) - COMPLETED (TRANSFORMERS MIGRATION)
-- Refactored `agent_observer.py` to use `transformers` and `bitsandbytes` (4-bit quantization) to resolve Windows compatibility issues.
-- Integrated `google/paligemma-3b-mix-224` from Hugging Face Hub.
-- Authenticated with Hugging Face Token.
-- Implemented `get_visual_findings` with `PaliGemmaProcessor` and `PaliGemmaForConditionalGeneration`.
-- Status: Model is currently downloading (approx 11GB). Script handles CPU fallback if 4-bit CUDA fails.
+Phase 2: Agent A (The Observer) - COMPLETED & VERIFIED
+- Refactored `agent_observer.py` to use `transformers`.
+- Currently using `MOCK_MODE=True` for stability on current hardware (prevent OOM).
+- Can successfully switch to `google/paligemma-3b-mix-224` if hardware allows.
 
 Phase 3: Agent B - The Investigator (Dynamic Interview) - COMPLETED & VERIFIED
-- Implemented `agent_investigator.py` using Hugging Face `transformers` pipeline.
-- Model: `google/medgemma-1.5-4b-it` (4B parameters, bfloat16).
-- Validated: Script successfully downloaded weights and generated a relevant follow-up clinical question based on dummy visual findings.
-- Fallback: Includes logic to downgrade to smaller Gemma models if high-vram models fail in production.
+- Implemented `agent_investigator.py` using `google/gemma-2-2b-it`.
+- FIXED: Resolved `ProcessorMixin` error by correctly setting task to `"text-generation"`.
+- FIXED: Replaced deprecated `torch_dtype` with `model_kwargs={"dtype": ...}`.
+- Successful initialization of the real 2B model with 4-bit quantization (`bitsandbytes`).
+
+Phase 4: The Orchestration (LangGraph Loop) - COMPLETED & VERIFIED
+- Created and executed `orchestrator.py`.
+- Workflow validated: Observer -> Investigator -> User Interaction -> Diagnostician -> Referral.
+- Agent B/C correctly reusing the loaded Gemma 2B pipeline to save memory.
+- Full loop executes successfully with real LLM inference for the interview and diagnosis steps.

@@ -10,3 +10,11 @@ __pycache__/
 # Environment/Project
 .env
 .ipynb_checkpoints/
+
+# Phase 4 / Runtime Items
+hf_cache/
+error_log*.txt
+model_error.txt
+jax_output.txt
+output_check.txt
+handle_status.txt

@@ -6,3 +6,7 @@ pillow
 numpy
 pandas
 python-dotenv
+langgraph
+langchain
+langchain_core
+langchain_community
