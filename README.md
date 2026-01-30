@@ -266,8 +266,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 **Project Lead**: Axel Delakowski  
-**Email**: [your.email@example.com]  
-**LinkedIn**: [linkedin.com/in/yourprofile]  
+**Email**: [axeldelakowski@gmail.com]  
+**LinkedIn**: [linkedin.com/in/adelakowski]  
 **Demo**: [Live Demo Link]
 
 ---
