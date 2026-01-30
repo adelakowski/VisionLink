@@ -20,6 +20,17 @@ VisionLink bridges the gap between advanced AI perception and clinical dialogue 
 - **💰 Rural-Ready**: 60%+ cost reduction via 4-bit quantization
 - **🔄 Adaptive Workflow**: LangGraph orchestration for cyclic reasoning
 
+## 📚 Documentation
+
+| For... | See... |
+|--------|--------|
+| **Quick Start** | [QUICKSTART.md](docs/QUICKSTART.md) |
+| **Technical Details** | [PRD.md](docs/PRD.md) |
+| **Project Structure** | [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) |
+| **Pitch Deck** | [PITCH_DECK.md](presentation/PITCH_DECK.md) |
+| **Executive Summary** | [EXECUTIVE_SUMMARY.md](presentation/EXECUTIVE_SUMMARY.md) |
+| **Visual Diagrams** | [assets/](assets/) |
+
 ---
 
 ## 🏗️ Architecture
@@ -76,10 +87,12 @@ pip install pydantic==2.7.0 fastapi==0.110.0 gradio==4.44.1
 ### Launch the UI
 
 ```bash
-python ui_gradio.py
+python src/ui_gradio.py
 ```
 
 Navigate to **http://127.0.0.1:7860** in your browser.
+
+📖 **For detailed instructions**, see [QUICKSTART.md](docs/QUICKSTART.md)
 
 ---
 
@@ -155,18 +168,41 @@ RECOMMENDATION: Immediate referral to retinal specialist within 24 hours.
 
 ```
 VisionLink/
-├── agent_observer.py          # Agent A: Visual feature extraction
-├── agent_investigator.py      # Agent B: Interview question generation
-├── agent_diagnostician.py     # Agent C: Triage report synthesis
-├── orchestrator.py            # LangGraph workflow orchestration
-├── ui_gradio.py              # Gradio web interface
-├── prepare_few_shot.py       # ODIR-5K dataset preparation
-├── few_shot_examples.json    # Few-shot prompting examples
-├── requirements_gradio.txt   # Python dependencies
-├── QUICKSTART.md            # Detailed usage guide
-├── PRD.md                   # Product requirements document
-└── progress.txt             # Development progress log
+├── src/                          # Source code
+│   ├── agent_observer.py         # Agent A: Visual feature extraction
+│   ├── agent_investigator.py     # Agent B: Interview question generation
+│   ├── agent_diagnostician.py    # Agent C: Triage report synthesis
+│   ├── orchestrator.py           # LangGraph workflow orchestration
+│   ├── ui_gradio.py             # Gradio web interface
+│   └── prepare_few_shot.py       # ODIR-5K dataset preparation
+│
+├── docs/                         # Documentation
+│   ├── PRD.md                    # Product requirements document
+│   └── QUICKSTART.md             # Quick start guide
+│
+├── presentation/                 # Presentation materials
+│   ├── EXECUTIVE_SUMMARY.md      # One-page business overview
+│   ├── PITCH_DECK.md            # 5-minute pitch deck
+│   ├── TECHNICAL_POSTER.md       # Technical deep dive
+│   └── SHOWCASE_MATERIALS.md     # Materials index
+│
+├── assets/                       # Visual assets
+│   ├── architecture_diagram.png  # Three-agent workflow
+│   └── impact_comparison.png     # Traditional vs VisionLink
+│
+├── data/                         # Data files
+│   └── few_shot_examples.json    # Few-shot prompting examples
+│
+├── scripts/                      # Utility scripts
+│   ├── check_cuda.py            # CUDA availability checker
+│   └── ...                       # Other utilities
+│
+├── requirements.txt              # Core dependencies
+├── requirements_gradio.txt       # Gradio UI dependencies
+└── README.md                     # This file
 ```
+
+📋 **For complete structure**, see [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 
 ---
 

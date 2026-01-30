@@ -13,7 +13,7 @@
 cd d:\Users\axeld\MCIT\VisionLink\VisionLink
 
 # Activate the virtual environment and run
-.\venv_gradio\Scripts\Activate.ps1; python ui_gradio.py
+.\venv_gradio\Scripts\Activate.ps1; python src/ui_gradio.py
 ```
 
 The UI will be available at: **http://127.0.0.1:7860**
@@ -66,7 +66,7 @@ The UI runs in a clean virtual environment (`venv_gradio`) with the following st
 
 ### If models fail to load:
 - The system will automatically fall back to MOCK_MODE
-- Check CUDA availability with: `python check_cuda.py`
+- Check CUDA availability with: `python scripts/check_cuda.py`
 
 ### To recreate the virtual environment:
 ```powershell
@@ -81,7 +81,7 @@ pip install pydantic==2.7.0 fastapi==0.110.0 gradio==4.44.1
 
 Test images are available in:
 - `archive/ODIR-5K/Training Images/` (Left-Fundus images)
-- Use images from `few_shot_examples.json` for pre-validated cases
+- Use images from `data/few_shot_examples.json` for pre-validated cases
 
 ## 🎓 For Judges/Demo
 

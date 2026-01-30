@@ -1,4 +1,0 @@
-403 Client Error.
-
-You don't have permission to access resource at URL: https://www.kaggle.com/models/keras/paligemma/keras/pali_gemma_3b_mix_224/4. The server reported the following issues: Permission denied on resource (or it may not exists).
-Please make sure you are authenticated if you are trying to access a private resource or a resource requiring consent.
