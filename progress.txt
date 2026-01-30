@@ -18,3 +18,15 @@ Phase 4: The Orchestration (LangGraph Loop) - COMPLETED & VERIFIED
 - Workflow validated: Observer -> Investigator -> User Interaction -> Diagnostician -> Referral.
 - Agent B/C correctly reusing the loaded Gemma 2B pipeline to save memory.
 - Full loop executes successfully with real LLM inference for the interview and diagnosis steps.
+
+Phase 5: User Interface (Gradio) - COMPLETED & VERIFIED ✅
+- Created `ui_gradio.py` with step-by-step Blocks interface.
+- Implemented error handling for missing image uploads.
+- Integrated all three agents (Observer, Investigator, Diagnostician).
+- Created fresh virtual environment `venv_gradio` to avoid dependency conflicts.
+- FIXED: Resolved FastAPI/Pydantic version conflicts with stable match:
+  * pydantic==2.7.0
+  * fastapi==0.110.0
+  * gradio==4.44.1
+- UI successfully running at http://127.0.0.1:7860
+- To run: `.\venv_gradio\Scripts\Activate.ps1; python ui_gradio.py`

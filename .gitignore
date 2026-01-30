@@ -18,3 +18,8 @@ model_error.txt
 jax_output.txt
 output_check.txt
 handle_status.txt
+
+# Phase 5 / Gradio UI
+venv_gradio/
+ui_error.txt
+test_gradio.py

@@ -138,26 +138,43 @@ graph LR
 
 ### Phase 5: User Interface (Gradio)
 *   **Goal:** Simple, demonstrative UI for judges.
-*   **Code Strategy:**
+*   **Code Strategy (The "Winning" Upgrade):**
+    *   *Recommendation:* Use Gradio's `ChatInterface` with multimodal support. This allows the judges to see Agent B ask a question, and Agent C only "Synthesizes" the report after the user answers.
     ```python
     import gradio as gr
 
-    def triage_pipeline(image, patient_notes):
-        # Simplified pipeline for demo (non-loop version for basic UI)
-        findings = get_visual_findings(image)
-        question = generate_interview_question(findings)
-        # In full app, this would be a chat interface. 
-        # For simple demo:
-        report = generate_final_report(findings, patient_notes)
-        return findings, question, report
+    def vision_link_chat(message, history):
+        # message is a dict: {"text": "...", "files": ["..."]}
+        image_path = message["files"][0] if message["files"] else None
+        user_text = message["text"]
 
-    ui = gr.Interface(
-        fn=triage_pipeline,
-        inputs=[gr.Image(type="filepath"), "text"],
-        outputs=["text", "text", "text"],
-        title="VisionLink: Rural Triage Agent"
+        if not history:
+            # Error Handling: Ensure user uploaded an image
+            if not image_path:
+                return "⚠️ Please upload a retinal scan to start the triage process."
+
+            # First Turn: Agent A (Observer) -> Agent B (Investigator)
+            findings = get_visual_findings(image_path) # Agent A
+            question = generate_interview_question(findings) # Agent B
+            return f"**Visual Findings:** {findings}\n\n**Interviewer:** {question}"
+        else:
+            # Second Turn: Agent C (Diagnostician)
+            # Pull findings from history and combine with user's new answer
+            past_findings = history[0][1] 
+            report = generate_final_report(past_findings, user_text) # Agent C
+            return f"**Final Triage Report:**\n\n{report}"
+
+    demo = gr.ChatInterface(
+        fn=vision_link_chat,
+        multimodal=True,
+        title="VisionLink: Rural Triage Agent",
+        description="Upload a retinal scan to start the automated triage interview.",
+        # Ensure UI follows the persona
+        additional_inputs=[
+             gr.Textbox(value="You are an Ophthalmic Nurse Assistant.", label="System Persona", visible=False)
+        ]
     )
-    ui.launch()
+    demo.launch()
     ```
 
 ---

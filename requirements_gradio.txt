@@ -1,0 +1,9 @@
+# Core dependencies for VisionLink Gradio UI
+gradio>=4.25.0
+transformers
+torch
+pillow
+numpy
+python-dotenv
+bitsandbytes
+accelerate
