@@ -1,0 +1,8 @@
+transformers
+torch
+bitsandbytes
+accelerate
+pillow
+numpy
+pandas
+python-dotenv

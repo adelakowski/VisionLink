@@ -3,10 +3,9 @@ Phase 1: Data Preparation (ODIR-5K) - COMPLETED & VERIFIED
 - Saved examples to `few_shot_examples.json`.
 - Verified image paths and diagnostic keywords by re-running `prepare_few_shot.py`.
 
-Phase 2: Agent A (The Observer) - COMPLETED
-- Implemented `agent_observer.py` using `keras_nlp` and `pali_gemma_3b_mix_224`.
-- Configured model for `float16` precision to target low-resource deployment.
-- Established `analyze_image` function for visual feature extraction.
-- Integrated testing with Phase 1 data (`few_shot_examples.json`).
-- ENHANCED: Updated `analyze_image` prompt to explicitly target Diabetic Retinopathy and Glaucoma ("detect signs of diabetic retinopathy and glaucoma...").
-- ENHANCED: Added verification loops for both 'D' (Diabetic Retinopathy) and 'G' (Glaucoma) classes in the test stub.
+Phase 2: Agent A (The Observer) - COMPLETED (TRANSFORMERS MIGRATION)
+- Refactored `agent_observer.py` to use `transformers` and `bitsandbytes` (4-bit quantization) to resolve Windows compatibility issues.
+- Integrated `google/paligemma-3b-mix-224` from Hugging Face Hub.
+- Authenticated with Hugging Face Token.
+- Implemented `get_visual_findings` with `PaliGemmaProcessor` and `PaliGemmaForConditionalGeneration`.
+- Status: Model is currently downloading (approx 11GB). Script handles CPU fallback if 4-bit CUDA fails.
