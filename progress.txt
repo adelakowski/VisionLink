@@ -9,3 +9,9 @@ Phase 2: Agent A (The Observer) - COMPLETED (TRANSFORMERS MIGRATION)
 - Authenticated with Hugging Face Token.
 - Implemented `get_visual_findings` with `PaliGemmaProcessor` and `PaliGemmaForConditionalGeneration`.
 - Status: Model is currently downloading (approx 11GB). Script handles CPU fallback if 4-bit CUDA fails.
+
+Phase 3: Agent B - The Investigator (Dynamic Interview) - COMPLETED & VERIFIED
+- Implemented `agent_investigator.py` using Hugging Face `transformers` pipeline.
+- Model: `google/medgemma-1.5-4b-it` (4B parameters, bfloat16).
+- Validated: Script successfully downloaded weights and generated a relevant follow-up clinical question based on dummy visual findings.
+- Fallback: Includes logic to downgrade to smaller Gemma models if high-vram models fail in production.

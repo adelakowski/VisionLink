@@ -83,26 +83,46 @@ graph LR
 
 ### Phase 3: Agent B - The Investigator (Dynamic Interview)
 *   **Role:** Determine urgency by asking relevant medical history questions based on visual evidence.
-*   **Model:** MedGemma 9B (`gemma_1.1_instruction_en`).
+*   **Model:** MedGemma 1.5 4B-IT (medgemma_1.5_4b_it).
 *   **Input:** Visual Findings (Text from Agent A).
 *   **Output:** ONE crucial follow-up question for the patient.
 *   **Code Strategy:**
+    
     ```python
-    from keras_nlp.models import GemmaCausalLM
+    import torch
+    from transformers import pipeline
 
-    # Load MedGemma
-    med_gemma = GemmaCausalLM.from_preset("gemma_1.1_instruction_en") 
+    # Load the Jan 2026 MedGemma 1.5 weights via Hugging Face
+    # Built on Gemma 3, optimized for medical reasoning and instruction following
+    model_id = "google/medgemma-1.5-4b-it"
+
+    pipe = pipeline(
+        "image-text-to-text", 
+        model=model_id, 
+        torch_dtype=torch.bfloat16, 
+        device_map="auto"
+    )
 
     def generate_interview_question(visual_findings):
         system_prompt = """
         You are an ophthalmic nurse assistant. 
         Based on the visual findings from a retinal scan, determine ONE crucial follow-up question 
-        to ask the patient to assess urgency.
+        to ask the patient to assess urgency (e.g., sudden vision loss, flashes, or floaters).
         """
-        user_prompt = f"Visual Findings: {visual_findings}"
-        full_prompt = f"{system_prompt}\n{user_prompt}\nQuestion:"
-        
-        return med_gemma.generate(full_prompt)
+
+        # Construct the conversation following the Gemma 3 chat template
+        messages = [
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": f"{system_prompt}\n\nVisual Findings: {visual_findings}"}
+                ]
+            }
+        ]
+
+        # Generate the response
+        output = pipe(messages, max_new_tokens=128)
+        return output[0]['generated_text']
     ```
 
 ### Phase 4: The Orchestration (LangGraph Loop)
