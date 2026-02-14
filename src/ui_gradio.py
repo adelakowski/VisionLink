@@ -1,4 +1,5 @@
 import gradio as gr
+import os
 from agent_observer import get_visual_findings
 from agent_investigator import generate_interview_question
 from agent_diagnostician import generate_referral
@@ -158,8 +159,8 @@ if __name__ == "__main__":
     try:
         demo.launch(
             share=False,
-            server_name="127.0.0.1",
-            server_port=7860,
+            server_name="0.0.0.0", 
+            server_port=int(os.environ.get("PORT", 7860)),
             show_error=True,
             inbrowser=True
         )

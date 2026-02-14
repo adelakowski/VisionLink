@@ -92,14 +92,14 @@ def generate_interview_question(visual_findings, history=None):
             }
         ]
         # Generate the response
-        output = local_pipe(messages, max_new_tokens=128)
+        output = local_pipe(messages, max_new_tokens=512)
         return output[0]['generated_text']
     else:
         # Text-generation fallback structure (chat template)
         messages = [
             {"role": "user", "content": f"{system_prompt}\n\n{context_text}"}
         ]
-        output = local_pipe(messages, max_new_tokens=128, return_full_text=False)
+        output = local_pipe(messages, max_new_tokens=512, return_full_text=False)
         return output[0]['generated_text']
 
 if __name__ == "__main__":

@@ -1,0 +1,11 @@
+.git
+.gitignore
+__pycache__
+archive
+archive.zip
+*.pyc
+*.pyo
+venv
+venv_gradio
+hf_cache
+full_df.csv.zip

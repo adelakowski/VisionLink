@@ -6,8 +6,16 @@ from transformers import pipeline
 def generate_referral(findings, history):
     # ... (prompt def)
     base_prompt = f"""You are a senior ophthalmologist. Review the visual findings: {findings} and the patient's history: {history}. 
-Write a referral letter for a specialist. Include a Triage Level: Green (Routine), Yellow (Urgent), Red (Emergency).
-If the history and findings are too vague to form even a preliminary referral, simply output 'INSUFFICIENT_INFO'."""
+    
+    Determine the Triage Level based on these STRICT criteria:
+    - **RED (EMERGENCY)**: Sudden vision loss (hours/days), eye pain, trauma, retinal detachment, or signs of severe proliferative retinopathy with active bleeding. Immediate referral required.
+    - **YELLOW (URGENT)**: Distorted vision, macular edema, severe non-proliferative retinopathy, or gradual but significant vision decline. Specialist needed within 1-2 weeks.
+    - **GREEN (ROUTINE)**: Mild/Moderate retinopathy, stable vision, routine screening, or normal findings. Routine follow-up.
+
+    Write a professional referral letter. 
+    explicitly state the TRIAGE LEVEL at the top.
+    Explain your reasoning for the chosen level.
+    """
 
     # Load shared pipe
     pipe = load_medgemma_model()

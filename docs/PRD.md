@@ -179,6 +179,58 @@ graph LR
 
 ---
 
+
+### Phase 6: Deployment & Optimization (The "Path to Production")
+Goal: Transition from a local notebook to a globally accessible, scalable web application while demonstrating responsible resource usage (a key judging criteria).
+
+6.1. Model Training & Fine-Tuning (Vertex AI)
+Objective: Optimize Agent A (PaliGemma) to specifically recognize ophthalmic biomarkers (microaneurysms, cupping) rather than general objects.
+
+Hardware Strategy:
+
+Platform: Google Cloud Vertex AI (Workbench or Training Jobs).
+
+GPU Selection: NVIDIA L4 (24GB vRAM).
+
+Why: The L4 is specifically optimized for the Gemma family (G2 instances), offering the best price-performance ratio for inference and fine-tuning of 2B-9B parameter models.
+
+Optimization Technique:
+
+LoRA (Low-Rank Adaptation): Fine-tune only 1-5% of the model parameters. This allows the training to fit on a single GPU and prevents "catastrophic forgetting" of the model's core visual capabilities.
+
+Mixed Precision (Float16): Use bfloat16 to accelerate training throughput on the L4 GPU.
+
+6.2. Application Deployment (Firebase + Cloud Run)
+Architecture:
+
+Backend (The Brains): Dockerize the LangGraph agent and Gradio interface. Deploy as a Cloud Run Service. This allows the app to scale down to zero (costing $0 when not in use) and scale up instantly during judging demos.
+
+Frontend (The Face): Use Firebase Hosting to serve the application.
+
+Why: Firebase Hosting provides a global CDN, free SSL, and a professional custom domain (e.g., app.visionlink.xyz) rather than a raw Cloud Run URL.
+
+Implementation Steps:
+
+Dockerize: Create a Dockerfile installing keras-nlp, gradio, and the saved LoRA weights.
+
+Build: Submit the build to Google Cloud Artifact Registry.
+
+Deploy Backend:
+
+Bash
+gcloud run deploy visionlink-backend \
+  --image gcr.io/$PROJECT_ID/visionlink \
+  --platform managed \
+  --region us-central1 \
+  --memory 16Gi \
+  --gpu 1  # Attach 1 GPU for fast inference during the demo
+Connect Firebase: Configure firebase.json to rewrite all traffic to the Cloud Run service, ensuring a seamless user experience.
+
+6.3. "Edge" Optimization Note (Bonus Points)
+For the "On-Device" Narrative: explicitly mention in the documentation that while the demo runs on Cloud Run for speed, the model weights have been exported to TensorFlow Lite (TFLite) format. This proves the system is ready for eventual deployment on Android tablets in offline rural clinics.
+
+---
+
 ## 4. "Winning" Checklist & Narrative
 
 ### Checklist

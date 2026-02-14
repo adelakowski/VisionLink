@@ -30,3 +30,8 @@ Phase 5: User Interface (Gradio) - COMPLETED & VERIFIED ✅
   * gradio==4.44.1
 - UI successfully running at http://127.0.0.1:7860
 - To run: `.\venv_gradio\Scripts\Activate.ps1; python ui_gradio.py`
+
+Phase 6: Deployment & Optimization - PARTIALLY COMPLETED
+- ✅ DEPLOYED: Webapp active at https://visionlinktriage.web.app/ (Phase 6.2).
+- Implemented `Dockerfile`, `firebase.json`, and `deploy.ps1` for Cloud Run/Firebase.
+- Developed `scripts/train_pali_gemma.py` for LoRA fine-tuning with KerasNLP (Phase 6.1).
