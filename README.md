@@ -304,7 +304,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Project Lead**: Axel Delakowski  
 **Email**: [axeldelakowski@gmail.com]  
 **LinkedIn**: [linkedin.com/in/adelakowski]  
-**Demo**: [Live Demo Link]
+**Demo**: [[Live Demo Link](https://visionlinktriage.web.app/)]
 
 ---
 
