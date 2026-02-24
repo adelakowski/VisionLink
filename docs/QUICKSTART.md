@@ -1,10 +1,13 @@
 # VisionLink - Quick Start Guide
 
-## 🎯 Running the Gradio UI
+VisionLink is available in two distributions: an **Online Serverless Edition** and an **Offline GPU air-gapped Edition**.
+
+## ☁️ Option 1: VisionLink Online (Cloud/Serverless)
+This version uses Google's Gemini 1.5 Flash API for near-instant responses. It requires an active internet connection.
 
 ### Prerequisites
 - Python 3.9+
-- CUDA-capable GPU (optional, will use MOCK_MODE if unavailable)
+- A Google AI Studio API Key
 
 ### Launch the UI
 
@@ -12,13 +15,41 @@
 # Navigate to project directory
 cd d:\Users\axeld\MCIT\VisionLink\VisionLink
 
-# Activate the virtual environment and run
-.\venv_gradio\Scripts\Activate.ps1; python src/ui_gradio.py
-```
+# Install dependencies
+pip install -r requirements.txt
 
+# Set your API Key in the `.env` file
+# GEMINI_API_KEY=your_api_key_here
+
+# Run the app
+python src/ui_gradio.py
+```
 The UI will be available at: **http://127.0.0.1:7860**
 
-### How to Use
+---
+
+## 🛑 Option 2: VisionLink Offline (Air-Gapped GPU)
+This version runs entirely locally using Hugging Face transformers. It requires no internet after the initial setup.
+
+### Prerequisites
+- Python 3.10+
+- A CUDA-capable NVIDIA GPU (8GB+ VRAM)
+
+### Launch the UI
+
+```powershell
+# Navigate to the Offline directory
+cd d:\Users\axeld\MCIT\VisionLink\VisionLinkOffline
+
+# Run the auto-installer/launcher
+# (Requires internet the very first time to download the ~6GB of models)
+.\run_offline.ps1
+```
+The UI will automatically open at: **http://127.0.0.1:7860**
+
+---
+
+## 💡 How to Use the UI
 
 1. **Upload a Retinal Scan**
    - Click on the image upload area
@@ -41,61 +72,12 @@ The UI will be available at: **http://127.0.0.1:7860**
 
 ## 🏗️ Architecture
 
-The system uses a three-agent relay architecture:
-
-- **Agent A (Observer)**: PaliGemma 3B - Extracts visual features from retinal scans
-- **Agent B (Investigator)**: Gemma 2 2B - Generates interview questions based on findings
-- **Agent C (Diagnostician)**: Gemma 2 2B - Synthesizes findings + history into triage report
-
-## 📦 Virtual Environment Details
-
-The UI runs in a clean virtual environment (`venv_gradio`) with the following stable versions:
-- `gradio==4.44.1`
-- `pydantic==2.7.0`
-- `fastapi==0.110.0`
-- `transformers` (latest)
-- `torch` (latest)
-- `bitsandbytes` (for 4-bit quantization)
-
-## 🔧 Troubleshooting
-
-### If the UI doesn't start:
-1. Ensure the virtual environment is activated
-2. Check that port 7860 is not in use
-3. Verify all dependencies are installed: `pip list`
-
-### If models fail to load:
-- The system will automatically fall back to MOCK_MODE
-- Check CUDA availability with: `python scripts/check_cuda.py`
-
-### To recreate the virtual environment:
-```powershell
-Remove-Item -Recurse -Force venv_gradio
-python -m venv venv_gradio
-.\venv_gradio\Scripts\Activate.ps1
-pip install -r requirements_gradio.txt
-pip install pydantic==2.7.0 fastapi==0.110.0 gradio==4.44.1
-```
+The system uses a three-agent relay architecture.
+- **Online:** Gemini 1.5 Flash (API)
+- **Offline:** PaliGemma 3B + Gemma 2 2B (Local via transformers with 4-bit quantization)
 
 ## 📊 Sample Test Images
 
 Test images are available in:
 - `archive/ODIR-5K/Training Images/` (Left-Fundus images)
 - Use images from `data/few_shot_examples.json` for pre-validated cases
-
-## 🎓 For Judges/Demo
-
-This implementation demonstrates:
-1. ✅ Multi-agent orchestration (3 specialized agents)
-2. ✅ Vision-Language Model integration (PaliGemma)
-3. ✅ Medical LLM reasoning (MedGemma/Gemma 2)
-4. ✅ Interactive patient interview workflow
-5. ✅ Real-time triage report generation
-6. ✅ Production-ready UI with error handling
-7. ✅ Efficient model loading with 4-bit quantization
-
-## 📝 Notes
-
-- Currently using MOCK_MODE for Agent A to prevent OOM on limited hardware
-- Can be switched to full PaliGemma inference by setting `MOCK_MODE=False` in `agent_observer.py`
-- Agent B and C use real Gemma 2 2B inference with 4-bit quantization

@@ -50,49 +50,54 @@ graph LR
     H -->|Yes| I[Triage Report]
 ```
 
-### Agent Breakdown
+### Architecture Versions
 
-| Agent | Role | Model | Function |
-|-------|------|-------|----------|
-| **Agent A** | 👁️ Observer | PaliGemma 3B | Extracts visual features from retinal scans |
-| **Agent B** | 🔬 Investigator | MedGemma 1.5 4B-IT | Generates targeted medical history questions |
-| **Agent C** | 📋 Diagnostician | MedGemma 1.5 4B-IT | Synthesizes findings into triage reports |
+VisionLink is provided in two distinct distributions to handle both modern connected clinics and completely remote, unconnected areas.
+
+**1. VisionLink Online (Cloud/Serverless)**
+- Uses Google's **Gemini 1.5 Flash API**.
+- Zero cold-start times; responses in milliseconds.
+- Severless deployment to Google Cloud Run and Firebase Hosting.
+- Extremely low cost and requires zero local hardware.
+
+**2. VisionLink Offline (Air-Gapped GPU Edition)**
+- Runs locally via Hugging Face `transformers`.
+- **Agent A**: PaliGemma 3B (4-bit quantization).
+- **Agent B & C**: Gemma-2-2b-IT (4-bit quantization).
+- Fully air-gapped; requires a CUDA-enabled GPU (8GB+ VRAM).
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.9+
-- CUDA-capable GPU (optional, falls back to CPU/MOCK mode)
-- 8GB+ RAM
+### Option 1: VisionLink Online (Cloud/Serverless)
+Requires an active internet connection and a Google AI Studio API key.
 
-### Installation
+1. Clone the repository and install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Create a `.env` file in the root directory and add your key:
+   ```env
+   GEMINI_API_KEY=your_api_key_here
+   ```
+3. Run the Gradio UI:
+   ```bash
+   python src/ui_gradio.py
+   ```
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/VisionLink.git
-cd VisionLink
+### Option 2: VisionLink Offline (Air-Gapped GPU)
+Requires a CUDA-capable NVIDIA GPU.
 
-# Create virtual environment
-python -m venv venv_gradio
-.\venv_gradio\Scripts\Activate.ps1  # Windows
-# source venv_gradio/bin/activate    # Linux/Mac
+1. Navigate to the `VisionLinkOffline` directory.
+2. Read the `OFFLINE_RUNNING_GUIDE.md` for setup instructions.
+3. Run the auto-installer/launcher (requires internet for first run *only*):
+   ```powershell
+   cd VisionLinkOffline
+   .\run_offline.ps1
+   ```
 
-# Install dependencies with stable versions
-pip install -r requirements_gradio.txt
-pip install pydantic==2.7.0 fastapi==0.110.0 gradio==4.44.1
-```
-
-### Launch the UI
-
-```bash
-python src/ui_gradio.py
-```
-
-Navigate to **http://127.0.0.1:7860** in your browser.
-
-📖 **For detailed instructions**, see [QUICKSTART.md](docs/QUICKSTART.md)
+📖 **For detailed instructions**, see [QUICKSTART.md](docs/QUICKSTART.md) or the Offline Guide.
 
 ---
 
@@ -219,14 +224,13 @@ VisionLink uses the **ODIR-5K** (Ocular Disease Intelligent Recognition) dataset
 
 ## 🛠️ Technology Stack
 
-| Component | Technology | Version |
+| Component | Online Version | Offline Version |
 |-----------|-----------|---------|
-| Vision Model | PaliGemma | 3B Mix 224 |
-| Medical LLM | MedGemma / Gemma 2 | 1.5 4B-IT / 2B-IT |
-| Orchestration | LangGraph | Latest |
-| UI Framework | Gradio | 4.44.1 |
-| ML Framework | PyTorch + Transformers | Latest |
-| Optimization | BitsAndBytes | 4-bit quantization |
+| Vision Model | Gemini 1.5 Flash (API) | PaliGemma 3B (Local) |
+| Medical LLM | Gemini 1.5 Flash (API) | Gemma-2-2B-IT (Local) |
+| Orchestration | LangGraph | LangGraph |
+| UI Framework | Gradio 4.44.1 | Gradio 4.44.1 |
+| Infrastructure | Cloud Run + Firebase | Windows/Linux CUDA GPU |
 
 ---
 
@@ -302,9 +306,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 **Project Lead**: Axel Delakowski  
-**Email**: [axeldelakowski@gmail.com]  
-**LinkedIn**: [linkedin.com/in/adelakowski]  
-**Demo**: [Live Demo Link]
+**Email**: axeldelakowski@gmail.com  
+**LinkedIn**: linkedin.com/in/adelakowski  
+**Demo**: https://visionlinktriage.web.app/
 
 ---
 
@@ -317,7 +321,7 @@ If you use VisionLink in your research, please cite:
   author = {Delakowski, Axel},
   title = {VisionLink: AI-Powered Rural Triage Agent for Ophthalmic Care},
   year = {2026},
-  url = {https://github.com/yourusername/VisionLink}
+  url = {https://github.com/adelakowski/VisionLink}
 }
 ```
 
@@ -327,6 +331,6 @@ If you use VisionLink in your research, please cite:
 
 **Built with ❤️ for rural healthcare equity**
 
-[⭐ Star this repo](https://github.com/yourusername/VisionLink) | [🐛 Report Bug](https://github.com/yourusername/VisionLink/issues) | [💡 Request Feature](https://github.com/yourusername/VisionLink/issues)
+[⭐ Star this repo](https://github.com/adelakowski/VisionLink) | [🐛 Report Bug](https://github.com/adelakowski/VisionLink/issues) | [💡 Request Feature](https://github.com/adelakowski/VisionLink/issues)
 
 </div>

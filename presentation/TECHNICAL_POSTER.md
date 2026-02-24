@@ -65,21 +65,23 @@
 ## 🏗️ TECHNICAL ARCHITECTURE
 
 ### Layer 1: Visual Perception
-**Model**: PaliGemma 3B Mix 224  
+**Online**: Gemini 1.5 Flash (API)  
+**Offline**: PaliGemma 3B Mix 224 (Local, 4-bit Quantization)  
 **Task**: Vision-to-Text Translation  
 **Input**: 224x224 retinal fundus image  
 **Output**: Clinical description of pathological features  
 
-**Key Innovation**: Separates perception from reasoning, allowing medical LLM to focus on clinical logic
+**Key Innovation**: Separates perception from reasoning, allowing the medical LLM to focus on clinical logic.
 
 ### Layer 2: Clinical Reasoning
-**Model**: MedGemma 1.5 4B Instruction-Tuned  
+**Online**: Gemini 1.5 Flash (API)  
+**Offline**: Gemma-2-2B-IT (Local, 4-bit Quantization)  
 **Task**: Dynamic Interview + Diagnosis  
 **Agents**: 
 - **Investigator**: Generates questions based on visual findings
 - **Diagnostician**: Synthesizes multi-modal evidence into triage decision
 
-**Key Innovation**: Cyclic reasoning loop continues until sufficient information gathered
+**Key Innovation**: Cyclic reasoning loop continues until sufficient information is gathered.
 
 ### Layer 3: Orchestration
 **Framework**: LangGraph  
@@ -261,14 +263,14 @@ PATIENT EDUCATION: Improve glycemic control (target HbA1c <7%).
 
 ## 🛠️ TECHNOLOGY STACK
 
-| Layer | Technology | Justification |
-|-------|-----------|---------------|
-| Vision | PaliGemma 3B | Best-in-class VLM for medical imaging |
-| Reasoning | MedGemma 1.5 4B | Medical domain-tuned, instruction-following |
-| Orchestration | LangGraph | Cyclic workflows, state management |
-| Optimization | BitsAndBytes | 4-bit quantization for edge deployment |
-| UI | Gradio 4.44 | Rapid prototyping, medical-grade UX |
-| Dataset | ODIR-5K | Largest public ophthalmic dataset |
+| Layer | Online Version | Offline Version |
+|-------|----------------|-----------------|
+| **Vision** | Gemini 1.5 Flash | PaliGemma 3B |
+| **Reasoning** | Gemini 1.5 Flash | Gemma-2-2B-IT |
+| **Orchestration**| LangGraph | LangGraph |
+| **Optimization** | Serverless / Cloud Run | BitsAndBytes (4-bit quantization) |
+| **UI** | Gradio 4.44 | Gradio 4.44 |
+| **Dataset** | ODIR-5K | ODIR-5K |
 
 ---
 

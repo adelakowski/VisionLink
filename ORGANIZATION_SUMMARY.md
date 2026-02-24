@@ -46,7 +46,8 @@ VisionLink/
 │
 ├── 📁 venv_gradio/             # Virtual environment (gitignored)
 ├── 📁 hf_cache/                # Model cache (gitignored)
-└── 📁 archive/                 # Dataset (gitignored)
+├── 📁 archive/                 # Dataset (gitignored)
+└── 📁 VisionLinkOffline/       # Air-gapped GPU offline distribution
 ```
 
 ## ✅ What Changed

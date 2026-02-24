@@ -145,10 +145,11 @@ This document provides an overview of all materials created for showcasing Visio
 ## 📊 Key Talking Points
 
 ### For Technical Audiences (Developers, AI Researchers)
-1. **Multi-Agent Architecture**: "We separate perception from reasoning, improving interpretability"
-2. **4-bit Quantization**: "75% model size reduction while maintaining 98.7% accuracy"
-3. **LangGraph Orchestration**: "Cyclic reasoning loop continues until sufficient information"
-4. **Code Quality**: "Production-ready with error handling, MOCK_MODE fallback, and modular design"
+1. **Dual-Architecture**: "Available as a serverless Cloud Run application using Gemini API, or an air-gapped local deployment using PaliGemma/Gemma-2-2B."
+2. **Multi-Agent Architecture**: "We separate perception from reasoning, improving interpretability"
+3. **4-bit Quantization**: "For the offline iteration, we see 75% model size reduction while maintaining 98.7% accuracy"
+4. **LangGraph Orchestration**: "Cyclic reasoning loop continues until sufficient information"
+5. **Code Quality**: "Production-ready with error handling, full Cloud portability, and modular design"
 
 ### For Non-Technical Audiences (Recruiters, Business Stakeholders)
 1. **Impact**: "2.6 billion people lack eye care access, 80% of vision loss is preventable"
@@ -218,7 +219,7 @@ This document provides an overview of all materials created for showcasing Visio
 ```
 Subject: VisionLink - AI-Powered Rural Eye Care Triage
 
-Hi [Name],
+Hi there,
 
 I'm working on VisionLink, an AI system that brings specialist-level 
 eye care to rural populations through multi-agent orchestration.
@@ -231,8 +232,8 @@ Key highlights:
 I've attached a one-page executive summary. Would love to discuss 
 potential collaboration opportunities.
 
-GitHub: [link]
-Live Demo: [link]
+GitHub: https://github.com/adelakowski/VisionLink
+Live Demo: https://visionlinktriage.web.app/
 
 Best,
 Axel
@@ -302,10 +303,10 @@ Always close with what you're looking for: partnerships, advisors, funding, or c
 
 Update these placeholders in all documents:
 
-- **Email**: your.email@example.com
-- **LinkedIn**: linkedin.com/in/yourprofile
-- **GitHub**: github.com/yourusername/VisionLink
-- **Live Demo**: [Gradio hosted link or localhost]
+- **Email**: axeldelakowski@gmail.com
+- **LinkedIn**: linkedin.com/in/adelakowski
+- **GitHub**: github.com/adelakowski/VisionLink
+- **Live Demo**: https://visionlinktriage.web.app/
 - **Phone**: (optional)
 
 ---
@@ -318,10 +319,10 @@ Update these placeholders in all documents:
 - **Business Plan**: Full financial projections and go-to-market strategy
 
 ### For Learning More
-- **PaliGemma Paper**: [Link to research paper]
-- **MedGemma Documentation**: [Link to model card]
-- **LangGraph Tutorial**: [Link to LangChain docs]
-- **ODIR-5K Dataset**: [Kaggle link]
+- **PaliGemma Paper**: [arXiv:2407.07726](https://arxiv.org/abs/2407.07726)
+- **MedGemma Documentation**: [Google DeepMind Blog](https://deepmind.google/)
+- **LangGraph Tutorial**: [LangChain Docs](https://python.langchain.com/docs/langgraph/)
+- **ODIR-5K Dataset**: [Kaggle ODIR-5K](https://www.kaggle.com/datasets/andrewmvd/ocular-disease-recognition-odir5k)
 
 ---
 

@@ -10,7 +10,7 @@
 
 - Your Name: Axel Delakowski
 - Affiliation: MS Candidate, University of Pennsylvania
-- Contact: [email] | [LinkedIn] | [GitHub]
+- Contact: axeldelakowski@gmail.com | linkedin.com/in/adelakowski | github.com/adelakowski
 
 **Visual**: VisionLink logo + retinal scan image
 
@@ -41,9 +41,11 @@
 - Generates targeted medical history questions
 - "Have you experienced sudden vision loss?"
 
-**Agent C - The Diagnostician** (MedGemma 1.5 4B-IT)
+**Agent C - The Diagnostician** (MedGemma 1.5 4B-IT / Gemini)
 - Synthesizes findings into triage reports
 - "RED - Emergency referral within 24 hours"
+
+*Note: VisionLink is available as both an instant serverless API app (Online) and an air-gapped local GPU solution (Offline).*
 
 **Visual**: Architecture diagram (use generated image)
 
@@ -54,7 +56,7 @@
 ## Slide 4: Live Demo (60 seconds)
 **See VisionLink in Action**
 
-[Screen recording or live demo of Gradio UI]
+*(Live demonstration of Gradio UI)*
 
 **Demo Script**:
 1. Upload retinal scan showing diabetic retinopathy
@@ -72,10 +74,10 @@
 ## Slide 5: Technical Innovation (30 seconds)
 **What Makes VisionLink Different**
 
+✅ **Dual-Architecture**: Run serverless (Online) or air-gapped (Offline)  
 ✅ **Cyclic Reasoning**: Continues asking questions until confident  
 ✅ **Interpretable**: Each agent's output is human-readable  
-✅ **Rural-Optimized**: Runs on $1,500 consumer GPU  
-✅ **Offline-Capable**: No internet required  
+✅ **Rural-Optimized**: Offline version runs on $1,500 consumer GPU  
 
 **Key Metric**: **60-70% cost reduction** vs. traditional screening
 
@@ -190,10 +192,10 @@
 - ✅ Clear path to deployment
 
 **Contact**:
-- 📧 [your.email@example.com]
-- 💼 [linkedin.com/in/yourprofile]
-- 💻 [github.com/yourusername/VisionLink]
-- 🌐 [Live Demo Link]
+- 📧 axeldelakowski@gmail.com
+- 💼 linkedin.com/in/adelakowski
+- 💻 github.com/adelakowski/VisionLink
+- 🌐 https://visionlinktriage.web.app/
 
 **Visual**: VisionLink logo + call to action
 

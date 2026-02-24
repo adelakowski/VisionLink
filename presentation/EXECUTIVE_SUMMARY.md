@@ -27,10 +27,10 @@
 - **Agent C (Diagnostician)**: Synthesizes findings into triage reports
 
 **Key Differentiators**
+- ✅ **Dual-Architecture**: Available as instant serverless (Online) or air-gapped GPU (Offline)
 - ✅ **Cyclic Reasoning**: Continues gathering information until confident
 - ✅ **Interpretable**: Each agent's output is human-readable
-- ✅ **Rural-Optimized**: Runs on $1,500 consumer hardware via 4-bit quantization
-- ✅ **Offline-Capable**: No internet required for inference
+- ✅ **Rural-Optimized**: Offline version runs on $1,500 consumer hardware via 4-bit quantization
 
 ---
 
@@ -78,13 +78,13 @@
 
 ### 🛠️ Technology Stack
 
-| Component | Technology | Justification |
-|-----------|-----------|---------------|
-| **Vision Model** | PaliGemma 3B | Best-in-class VLM for medical imaging |
-| **Medical LLM** | MedGemma 1.5 4B-IT | Domain-tuned, instruction-following |
-| **Orchestration** | LangGraph | Cyclic workflows, state management |
-| **Optimization** | BitsAndBytes | 4-bit quantization for edge deployment |
-| **Dataset** | ODIR-5K | 5,000 annotated retinal images |
+| Component | Online Version | Offline (Air-Gapped) Version |
+|-----------|----------------|------------------------------|
+| **Vision Model** | Gemini 1.5 Flash (API) | PaliGemma 3B (Local, 4-bit) |
+| **Medical LLM** | Gemini 1.5 Flash (API) | Gemma-2-2B-IT (Local, 4-bit) |
+| **Orchestration** | LangGraph | LangGraph |
+| **Infrastructure**| Cloud Run + Firebase | Consumer local GPU (8GB+ VRAM)|
+| **Dataset** | ODIR-5K | ODIR-5K |
 
 ---
 
@@ -137,20 +137,14 @@
 
 ### 📞 Contact
 
-**Demo**: [Live Gradio Interface]  
-**GitHub**: github.com/yourusername/VisionLink  
-**Email**: your.email@example.com  
-**LinkedIn**: linkedin.com/in/yourprofile
+**Demo**: https://visionlinktriage.web.app/  
+**GitHub**: github.com/adelakowski/VisionLink  
+**Email**: axeldelakowski@gmail.com  
+**LinkedIn**: linkedin.com/in/adelakowski
 
 ---
 
-### 🎓 Recognition
 
-- 🥇 **[Hackathon Name]** - Best Healthcare AI Solution (2026)
-- 🏆 **Social Impact Award** - [Competition] (2026)
-- 📰 **Featured**: [Publication], [Date]
-
----
 
 <div align="center">
 

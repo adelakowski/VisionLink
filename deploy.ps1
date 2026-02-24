@@ -21,17 +21,26 @@ gcloud config set project $PROJECT_ID
 # We use source deployment which builds the container via Cloud Build
 Write-Host "Building and deploying to Cloud Run (this may take a few minutes)..." -ForegroundColor Yellow
 
-# Note: Using --source . requires the Google Cloud SDK to zip and upload the context.
-# Ensure .gcloudignore is set up or excludes large files.
-gcloud run deploy $SERVICE_NAME `
-    --source . `
-    --region $REGION `
-    --allow-unauthenticated `
-    --project $PROJECT_ID `
-    --gpu 1 `
-    --memory 16Gi `
-    --no-gpu-zonal-redundancy `
-    --quiet
+# Load .env if it exists
+if (Test-Path ".env") {
+    Get-Content .env | Where-Object { $_ -match "^([^#].+?)=(.*)$" } | ForEach-Object {
+        $name, $value = $_ -split '=', 2
+        Set-Item -Path "Env:\$name" -Value $value
+    }
+}
+$HF_TOKEN = $env:HF_TOKEN
+
+# Set image URL using the existing Artifact Registry used by source deployments
+$IMAGE_URL = "$REGION-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/$SERVICE_NAME"
+
+Write-Host "Building Docker image using Cloud Build..." -ForegroundColor Yellow
+gcloud builds submit --tag $IMAGE_URL .
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Image build failed." -ForegroundColor Red
+    exit 1
+}
+
+gcloud run deploy $SERVICE_NAME --image $IMAGE_URL --region $REGION --allow-unauthenticated --project $PROJECT_ID --memory 16Gi --cpu 4 --gpu 1 --gpu-type nvidia-l4 --max-instances 1 --no-gpu-zonal-redundancy --timeout 3600 --set-env-vars HF_TOKEN=$HF_TOKEN --quiet
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Cloud Run deployment failed." -ForegroundColor Red
